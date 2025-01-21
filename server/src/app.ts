@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import connectDB from "./config.js";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.js";
@@ -14,7 +13,8 @@ const port: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 app.use(cors());
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Connect to MongoDB
 connectDB();
