@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import User, { IUser } from '../models/user.js'; 
+import User from '../models/user.js'; 
 
 const router: Router = express.Router();
 
@@ -24,7 +24,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
 // Get all users
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
     try {
-        const users: IUser[] = await User.find();
+        const users = await User.find();
         res.json(users);
     } catch (err: unknown) {
         if (err instanceof Error) {
@@ -38,7 +38,7 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
 // Get one user by ID
 router.get('/:id', async (req: Request, res: Response): Promise<void> => {
     try {
-        const user: IUser | null = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id);
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
@@ -56,7 +56,7 @@ router.get('/:id', async (req: Request, res: Response): Promise<void> => {
 // Update one user by ID
 router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
     try {
-        const user: IUser | null = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id);
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
@@ -79,7 +79,7 @@ router.patch('/:id', async (req: Request, res: Response): Promise<void> => {
 // Delete one user by ID
 router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
     try {
-        const user: IUser | null = await User.findByIdAndDelete(req.params.id);
+        const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;

@@ -1,12 +1,4 @@
-import mongoose, { Document } from 'mongoose';
-
-// Interface for User document
-interface IUser extends Document {
-  email: string;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import mongoose from 'mongoose';
 
 // The User model
 const userSchema = new mongoose.Schema({
@@ -29,8 +21,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Create the User model with TypeScript interface
-const User = mongoose.model<IUser>('User', userSchema);
+// Create the User model
+const User = mongoose.model('User', userSchema);
 
 export default User;
-export { IUser };

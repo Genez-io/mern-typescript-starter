@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express from "express";
 import bodyParser from "body-parser";
 import connectDB from "./config.js";
 import dotenv from "dotenv";
@@ -7,15 +7,11 @@ import cors from "cors";
 
 dotenv.config();
 
-const app: Application = express();
+const app = express();
 const port: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
-// Cors
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+// Simple CORS setup
+app.use(cors());
 
 // Middleware
 app.use(bodyParser.json());
